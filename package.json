@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "engines": {
         "node": "18.12.1",
-        "npm": "9.2.1"
+        "npm": "9.2.0"
     },
     "scripts": {
         "client": "cd client && npm start",
