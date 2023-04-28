@@ -68,7 +68,7 @@ const StripeCheckoutButton = ({price}) => {
       return;
     }
     setIsProcessingPayment(true);
-    const response = await fetch('/.netlify/functions/create-payment-intent', {
+    const response = await fetch('../../../netlify/functions/create-payment-intent', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
