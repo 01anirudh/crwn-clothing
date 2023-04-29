@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+
 
 import CollectionItem from "../collection-item/collection-item.component.";
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Route, Routes, useMatch, useNavigate, useParams} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import { connect } from 'react-redux';
 import CollectionsOverviewContainer from '../../components/collections-overview/collection-overview.container';
 import CollectionPageContainer from '../collection/collection.container';

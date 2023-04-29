@@ -46,7 +46,8 @@ export const AddButton = styled(CustomButton)`
     display: block;
     opacity: 0.9;
     min-width: unset;
-    padding: 0 10px;
+    padding: 0;
+    font-size:10px;
   }
 `;
 
