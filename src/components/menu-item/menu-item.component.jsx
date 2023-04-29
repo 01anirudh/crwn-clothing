@@ -10,17 +10,14 @@ import {
 
 const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
   const navigate = useNavigate();
-  const params = useParams();
-  const match = useMatch(linkUrl);
+
   
-  const handleClick = () => {
-    navigate(`${linkUrl}`, { state: { from: params, match: match } });
-  };
+  const onNavigateHandler = () => navigate(linkUrl);
 
   return (
     <MenuItemContainer
       size={size}
-      onClick={handleClick}
+      onClick={onNavigateHandler}
     >
       <BackgroundImageContainer
         className='background-image'

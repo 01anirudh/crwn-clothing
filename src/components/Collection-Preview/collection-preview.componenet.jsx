@@ -1,23 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import CollectionItem from "../collection-item/collection-item.component.";
+
 import {
   CollectionPreviewContainer,
   TitleContainer,
-  PreviewContainer,
-} from "./collection-preview.styles";
+  PreviewContainer
+} from './collection-preview.styles';
 
-const CollectionPreview = ({ title, items, routeName }) => {
-  const navigate = useNavigate();
+const CollectionPreview = ({
+  title,
+  items,
+  routeName
+}) => {
 
   return (
     <CollectionPreviewContainer>
-      <TitleContainer onClick={() => navigate(`/${routeName}`)}>
+      <TitleContainer to={routeName}>
         {title.toUpperCase()}
       </TitleContainer>
       <PreviewContainer>
         {items
           .filter((item, idx) => idx < 4)
-          .map((item) => (
+          .map(item => (
             <CollectionItem key={item.id} item={item} />
           ))}
       </PreviewContainer>
@@ -26,3 +32,4 @@ const CollectionPreview = ({ title, items, routeName }) => {
 };
 
 export default CollectionPreview;
+

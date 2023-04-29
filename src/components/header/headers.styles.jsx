@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 export const HeaderContainer = styled.div`
@@ -16,7 +16,7 @@ margin-bottom: 25px;
 }
 `;
 
-export const LogoContainer = styled(Link)`
+export const LogoContainer = styled(NavLink)`
 height: 100%;
 width: 70px;
 padding: 25px;
@@ -38,7 +38,7 @@ justify-content: flex-end;
     width:80%;
 }
 `;
-export const OptionLink = styled(Link)`
+export const OptionLink = styled(NavLink)`
 padding: 10px 15px;
 cursor: pointer;
 `;
