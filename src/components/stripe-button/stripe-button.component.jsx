@@ -58,7 +58,6 @@ import { PaymentButton, PaymentFormContainer } from './stripe-button.styles';
 const StripeCheckoutButton = ({price}) => {
   const stripe = useStripe();
   const elements = useElements();
-  const amount = price;
   const currentUser = useSelector(selectCurrentUser);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
@@ -68,12 +67,12 @@ const StripeCheckoutButton = ({price}) => {
       return;
     }
     setIsProcessingPayment(true);
-    const response = await fetch('../../../netlify/functions/create-payment-intent', {
+    const response = await fetch('/.netlify/functions/create-payment-intent', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ amount: amount * 100 }),
+      body: JSON.stringify({ amount: price * 100 }),
     }).then((res) => {
       return res.json();
     });
