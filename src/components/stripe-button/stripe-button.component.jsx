@@ -27,7 +27,7 @@ const StripeCheckoutButton = ({price}) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ amount: price * 100 }),
+      body: JSON.stringify({ amount: price  }),
     }).then((res) => {
       return res.json();
     });
