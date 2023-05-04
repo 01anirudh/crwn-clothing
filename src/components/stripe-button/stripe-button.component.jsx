@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import {  useStripe, useElements, PaymentElement,handleError } from '@stripe/react-stripe-js';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
-import { selectCurrentUser } from '../../redux/user/user.selectors';
+// import { selectCurrentUser } from '../../redux/user/user.selectors';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { FormContainer } from './stripe-button.styles';
