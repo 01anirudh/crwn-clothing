@@ -41,7 +41,7 @@ const StripeCheckoutButton = ({price}) => {
 
     const clientSecret = response.paymentIntent.client_secret;
 
-    const paymentResult = await stripe.confirmSetup({
+    const paymentResult = await stripe.confirmPayment({
     elements,
     clientSecret,
     confirmParams: {
