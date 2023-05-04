@@ -4,6 +4,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import { Provider} from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Elements } from "@stripe/react-stripe-js";
+import {options } from "../src/stripe/stripe.utils";
 
 import './index.css';
 import App from './App';
@@ -16,7 +17,7 @@ render(
     <React.StrictMode>
       <Router>
         <PersistGate persistor={persistor}>
-          <Elements stripe={stripePromise}>
+          <Elements stripe={stripePromise}  options={options}>
             <App />
           </Elements>
         </PersistGate>
