@@ -67,6 +67,6 @@ const StripeCheckoutButton = ({price}) => {
         </PaymentButton>
       </FormContainer>
     </PaymentFormContainer>
-  );
+  ); 
 };
 export default StripeCheckoutButton;
