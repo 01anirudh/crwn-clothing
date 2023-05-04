@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import {  useStripe, useElements, PaymentElement,handleError } from '@stripe/react-stripe-js';
-// import { useSelector } from 'react-redux';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useSelector } from 'react-redux';
 
-// import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { FormContainer } from './stripe-button.styles';
@@ -13,7 +13,7 @@ import { PaymentButton, PaymentFormContainer } from './stripe-button.styles';
 const StripeCheckoutButton = ({price}) => {
   const stripe = useStripe();
   const elements = useElements();
-  // const currentUser = useSelector(selectCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const paymentHandler = async (e) => {
@@ -22,13 +22,6 @@ const StripeCheckoutButton = ({price}) => {
       return;
     }
     setIsProcessingPayment(true);
-
-  const {error: submitError} = await elements.submit();
-  if (submitError) {
-    handleError(submitError);
-    return;
-  }
-
     const response = await fetch('/.netlify/functions/create-payment-intent', {
       method: 'post',
       headers: {
@@ -41,15 +34,14 @@ const StripeCheckoutButton = ({price}) => {
 
     const clientSecret = response.paymentIntent.client_secret;
 
-    const paymentResult = await stripe.confirmPayment({
-    elements,
-    clientSecret,
-    confirmParams: {
-      return_url: 'https://example.com/order/123/complete',
-    },
-    // Uncomment below if you only want redirect for redirect-based payments
-    redirect: "if_required",
-  });
+    const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: currentUser ? currentUser.displayName : 'Anirudh',
+        },
+      },
+    });
 
     setIsProcessingPayment(false);
 
@@ -65,7 +57,8 @@ const StripeCheckoutButton = ({price}) => {
   return (
     <PaymentFormContainer>
       <FormContainer onSubmit={paymentHandler}>
-        <PaymentElement/>
+        <h2>Credit Card Payment:</h2>
+        <CardElement />
         <PaymentButton
           buttonType={CustomButton}
           isLoading={isProcessingPayment}
