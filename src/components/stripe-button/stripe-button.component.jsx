@@ -13,7 +13,7 @@ import { PaymentButton, PaymentFormContainer } from './stripe-button.styles';
 const StripeCheckoutButton = ({price}) => {
   const stripe = useStripe();
   const elements = useElements();
-  const currentUser = useSelector(selectCurrentUser);
+  // const currentUser = useSelector(selectCurrentUser);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const paymentHandler = async (e) => {
