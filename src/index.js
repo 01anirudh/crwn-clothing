@@ -9,6 +9,7 @@ import './index.css';
 import App from './App';
 import {store,persistor} from './redux/store';
 import { stripePromise } from '../src/stripe/stripe.utils';
+import * as serviceWorker from './serviceWorkerRegistration';
 
 const rootElement = document.getElementById("root");
 render(
@@ -25,3 +26,6 @@ render(
   </Provider>,
   rootElement
 );
+
+serviceWorker.register();
+

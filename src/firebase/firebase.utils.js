@@ -17,30 +17,30 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
-export const createUserProfileDocument = async (userAuth, addtionalData) => {
-  if (!userAuth) return;
+// export const createUserProfileDocument = async (userAuth, addtionalData) => {
+//   if (!userAuth) return;
 
-  const userRef = doc(firestore, `users/${userAuth.uid}`);
+//   const userRef = doc(firestore, `users/${userAuth.uid}`);
 
-  const snapShot = await getDoc(userRef);
+//   const snapShot = await getDoc(userRef);
 
-  if (!snapShot.exists()) {
-    const { displayName, email } = userAuth;
-    const createdAt = new Date();
+//   if (!snapShot.exists()) {
+//     const { displayName, email } = userAuth;
+//     const createdAt = new Date();
 
-    try {
-      await setDoc(userRef, {
-        displayName,
-        email,
-        createdAt,
-        ...addtionalData
-      })
-    } catch (error) {
-      console.log('error creating user ', error.message);
-    }
-  }
-  return userRef;
-}
+//     try {
+//       await setDoc(userRef, {
+//         displayName,
+//         email,
+//         createdAt,
+//         ...addtionalData
+//       })
+//     } catch (error) {
+//       console.log('error creating user ', error.message);
+//     }
+//   }
+//   return userRef;
+// }
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   const collectionRef = collection(firestore, collectionKey);
