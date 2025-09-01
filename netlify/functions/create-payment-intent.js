@@ -1,35 +1,26 @@
 require('dotenv').config();
-const Razorpay = require('razorpay');
-
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   try {
-    const { amount, currency = 'INR', receipt } = JSON.parse(event.body);
+    const { amount } = JSON.parse(event.body);
 
-    // Razorpay accepts amount in **paise** (for INR), so multiply by 100 if amount is in rupees
-    const options = {
-      amount: amount * 100, // e.g. 500 means ₹500, so send 50000
-      currency,
-      receipt: receipt || `receipt_${Date.now()}`,
-      payment_capture: 1, // auto-capture
-    };
-
-    const order = await razorpay.orders.create(options);
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'usd',
+      payment_method_types: ['card'],
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ order }),
+      body: JSON.stringify({ paymentIntent }),
     };
   } catch (error) {
-    console.error(error);
+    console.log({ error });
 
     return {
-      statusCode: 400,
-      body: JSON.stringify({ error: error.message }),
+      status: 400,
+      body: JSON.stringify({ error }),
     };
   }
 };
