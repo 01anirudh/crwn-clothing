@@ -38,8 +38,9 @@ const CheckoutPage = ({cartItems,total}) => (
                 *Please  use the following test credit cart for payments*
                 <br/>
                 4242 4242 4242 4242 - Exp: 01/24 - CVV:123
+                <br/> Currently Unavailable
             </div>
-            <StripeCheckoutButton price={total}/>
+            {/* <StripeCheckoutButton price={total}/> */}
     </div>
 )
 
